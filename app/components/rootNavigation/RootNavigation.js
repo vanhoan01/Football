@@ -1,70 +1,29 @@
 import * as React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {
+  NavigationContainer,
+  useNavigationContainerRef,
+} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import HomeScreen from '../home/components/HomeScreen';
-import LoginScreen from '../authentication/login/LoginScreen';
-import DetailScreen from '../garage/DetailScreen';
 import Constant from '../../controller/Constant';
-import UsersScreen from '../users/UsersScreen';
-import UserDetailScreen from '../users/UserDetailScreen';
-import MatchScreen from '../match/MatchScreen';
-import ChartsScreen from '../charts/ChartsScreen';
-import StatisticsScreen from '../statistics/StatisticsScreen';
-import PlayersScreen from '../players/PlayersScreen';
+import FixtureDetailsScreen from '../match/screens/FixtureDetailsScreen';
+import RootTabNavigator from './RootTabNavigator';
 
 const Stack = createNativeStackNavigator();
 
 const RootNavigation = () => {
+  const navigationRef = useNavigationContainerRef();
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName={Constant.screenName.Home}>
+    <NavigationContainer ref={navigationRef}>
+      <Stack.Navigator>
         <Stack.Screen
-          name={Constant.screenName.Login}
-          component={LoginScreen}
+          name={Constant.screenName.RootTabNavigator}
+          component={RootTabNavigator}
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name={Constant.screenName.Home}
-          component={HomeScreen}
-          options={{headerShown: false}}
-        />
-
-        <Stack.Screen
-          name={Constant.screenName.Detail}
-          component={DetailScreen}
-        />
-
-        <Stack.Screen
-          name={Constant.screenName.Users}
-          component={UsersScreen}
-          options={{headerShown: false}}
-        />
-
-        <Stack.Screen
-          name={Constant.screenName.UserDetail}
-          component={UserDetailScreen}
-          options={{title: 'User Detail'}}
-        />
-        <Stack.Screen
-          name={Constant.screenName.Match}
-          component={MatchScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name={Constant.screenName.Charts}
-          component={ChartsScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name={Constant.screenName.Statistics}
-          component={StatisticsScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name={Constant.screenName.Players}
-          component={PlayersScreen}
-          options={{headerShown: false}}
+          name={Constant.screenName.FixtureDetails}
+          component={FixtureDetailsScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

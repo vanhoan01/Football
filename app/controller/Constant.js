@@ -27,5 +27,7 @@ export default {
     Charts: 'ChartsScreen',
     Statistics: 'StatisticsScreen',
     Players: 'PlayersScreen',
+    FixtureDetails: 'FixtureDetailsScreen',
+    RootTabNavigator: 'RootTabNavigator',
   },
 };
