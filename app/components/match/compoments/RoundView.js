@@ -28,15 +28,6 @@ const RoundView = roundRS => {
   return (
     <View style={{}}>
       <View>
-        <Text
-          style={{
-            color: 'black',
-            fontSize: 16,
-            marginVertical: 14,
-            paddingHorizontal: 8,
-          }}>
-          Ngày thi đấu 10/38
-        </Text>
         <View
           style={{
             flexDirection: 'column',
