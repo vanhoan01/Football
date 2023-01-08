@@ -50,9 +50,6 @@ const RoundView = roundRS => {
             data = {rounds?.sort((a, b) =>
               a['fixture']['date'] > b['fixture']['date'] ? 1 : -1,
             )}
-            // data={rounds.sort((a, b) =>
-            //   a['fixture']['date'] > b['fixture']['date'] ? 1 : -1,
-            // )}
             renderItem={(item, index) => <FixtureView fixture={item} />}
             numColumns={1}
           />

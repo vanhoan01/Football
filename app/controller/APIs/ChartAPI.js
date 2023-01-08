@@ -1,6 +1,6 @@
 import axios from 'axios';
 import API from './API';
-export default class MatchAPIs {
+export default class ChartAPIs {
     static endpoints = {
         getStandingsByLeague: 'https://api-football-v1.p.rapidapi.com/v3/standings'
     };

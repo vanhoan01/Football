@@ -66,6 +66,8 @@ const SeasonView = roundRS => {
               data={rounds}
               renderItem={(item, index) => <NameView fixture={item} />}
               numColumns={1}
+              keyExtractor={item => item.rank}
+              initialNumToRender={20}
             />
         </View>
 
@@ -131,7 +133,9 @@ const SeasonView = roundRS => {
             <FlatList
               data={rounds}
               renderItem={(item, index) => <FixtureView fixture={item} />}
+              keyExtractor={item => item.rank}
               numColumns={1}
+              initialNumToRender={20}
             />
           </View>
           </ScrollView>

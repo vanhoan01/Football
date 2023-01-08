@@ -22,7 +22,7 @@ const ChartsScreen = () => {
   let [isLoading, setIsLoading] = React.useState(false);
   const [fixtures, setFixtures] = React.useState([]);
   const getFixturesByChart = async () => {
-
+    setIsLoading(true);
     try {
       let data = await ChartAPIs.getStandingsByLeague(
         '39',
@@ -33,6 +33,7 @@ const ChartsScreen = () => {
       console.log(error);
       setFixtures([]);
     }
+    setIsLoading(false);
   };
 
   // const getFixturesByChart = async () => {
@@ -998,11 +999,17 @@ const ChartsScreen = () => {
           Mùa giải 2022-23
         </Text>
       </View>
+      {isLoading ? (
+        <View style={styles.loadingView}>
+          <ActivityIndicator size="large" />
+        </View>
+      ) : (
         <FlatList
         data={rounds}
         renderItem={(item, index) => <SeasonView roundRS={fixtures} />}
         numColumns={1}
       />  
+      )}
      </View>
   );
 };
