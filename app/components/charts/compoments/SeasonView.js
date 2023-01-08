@@ -29,6 +29,8 @@ const SeasonView = roundRS => {
   let rounds = roundRS?.roundRS;
  
 
+  console.log("season_view")
+  console.log(rounds)
   return (
     <View style={{
       marginBottom:50,
