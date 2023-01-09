@@ -3,6 +3,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 //npx react-native start
 //npx react-native run-android
 //https://rapidapi.com/developer/billing/subscriptions-and-usage
+//npm install --force
 
 import RootNavigation from './app/components/rootNavigation/RootNavigation';
 

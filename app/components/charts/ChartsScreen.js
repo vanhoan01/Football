@@ -10,24 +10,20 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
-  SafeAreaView, 
-  ScrollView, 
-  StatusBar
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
 } from 'react-native';
 let rounds = [1];
 import SeasonView from './compoments/SeasonView';
 import ChartAPIs from '../../controller/APIs/ChartAPI';
 const ChartsScreen = () => {
-
   let [isLoading, setIsLoading] = React.useState(false);
   const [fixtures, setFixtures] = React.useState([]);
   const getFixturesByChart = async () => {
     setIsLoading(true);
     try {
-      let data = await ChartAPIs.getStandingsByLeague(
-        '39',
-        '2022'
-      );
+      let data = await ChartAPIs.getStandingsByLeague('39', '2022');
       setFixtures(data?.response[0]?.league?.standings[0]);
     } catch (error) {
       console.log(error);
@@ -974,28 +970,31 @@ const ChartsScreen = () => {
   //   }
   // };
   React.useEffect(() => {
-    setIsLoading(true)
+    setIsLoading(true);
     getFixturesByChart();
     console.log('fixtures: ');
     console.log(fixtures);
   }, []);
   return (
-     <View style={{
-      backgroundColor:"#fff"
-     }}>
-     <View style={{
-      height:50,
-      paddingVertical:10,
-      borderBottomWidth:1.2,
-      borderBottomColor:'gray',
-      borderTopColor:'gray',
-      borderTopWidth:1.2,
+    <View
+      style={{
+        backgroundColor: '#fff',
       }}>
-        <Text style={{
-          color:"black",
-          fontSize:14,
-          fontWeight:'400',
+      <View
+        style={{
+          height: 50,
+          paddingVertical: 10,
+          borderBottomWidth: 1.2,
+          borderBottomColor: 'gray',
+          borderTopColor: 'gray',
+          borderTopWidth: 1.2,
         }}>
+        <Text
+          style={{
+            color: 'black',
+            fontSize: 14,
+            fontWeight: '400',
+          }}>
           Mùa giải 2022-23
         </Text>
       </View>
@@ -1005,12 +1004,12 @@ const ChartsScreen = () => {
         </View>
       ) : (
         <FlatList
-        data={rounds}
-        renderItem={(item, index) => <SeasonView roundRS={fixtures} />}
-        numColumns={1}
-      />  
+          data={rounds}
+          renderItem={(item, index) => <SeasonView roundRS={fixtures} />}
+          numColumns={1}
+        />
       )}
-     </View>
+    </View>
   );
 };
 
