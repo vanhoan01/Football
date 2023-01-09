@@ -8,6 +8,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Constant from '../../controller/Constant';
 import FixtureDetailsScreen from '../match/screens/FixtureDetailsScreen';
 import RootTabNavigator from './RootTabNavigator';
+import SearchScreen from '../search/screens/SearchScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,6 +25,11 @@ const RootNavigation = () => {
         <Stack.Screen
           name={Constant.screenName.FixtureDetails}
           component={FixtureDetailsScreen}
+        />
+        <Stack.Screen
+          name={Constant.screenName.Search}
+          component={SearchScreen}
+          options={{headerShown: false}}
         />
       </Stack.Navigator>
     </NavigationContainer>

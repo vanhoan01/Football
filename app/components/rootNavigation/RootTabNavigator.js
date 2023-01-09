@@ -9,15 +9,20 @@ import ChartsScreen from '../charts/ChartsScreen';
 import StatisticsScreen from '../statistics/StatisticsScreen';
 import PlayersScreen from '../players/PlayersScreen';
 import {StyleSheet, View} from 'react-native';
+import {StackActions, useNavigation} from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
 const RootTabNavigator = () => {
+  const navigation = useNavigation();
+  const showSearch = () => {
+    navigation.dispatch(StackActions.push(Constant.screenName.Search));
+  };
   return (
     <View style={styles.containerMain}>
       <Appbar.Header style={styles.appbarHeader}>
         <Appbar.Content title="Football" titleStyle={styles.appbarLogo} />
-        <Appbar.Action icon="magnify" onPress={() => {}} />
+        <Appbar.Action icon="magnify" onPress={showSearch} />
       </Appbar.Header>
       <View style={styles.navigationContainer}>
         <Tab.Navigator

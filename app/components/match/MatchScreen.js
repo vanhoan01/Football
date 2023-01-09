@@ -100,7 +100,7 @@ const MatchScreen = () => {
           renderItem={(item, index) => <RoundView roundRS={fixtures} />}
           numColumns={1}
           onEndReached={onEnd}
-          onRefresh={onStart}
+          onRefresh={onRefresh}
           refreshing={isFetching}
           onEndReachedThreshold={0.1}
         />

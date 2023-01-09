@@ -29,5 +29,6 @@ export default {
     Players: 'PlayersScreen',
     FixtureDetails: 'FixtureDetailsScreen',
     RootTabNavigator: 'RootTabNavigator',
+    Search: 'SearchScreen',
   },
 };
