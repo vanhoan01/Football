@@ -47,7 +47,7 @@ const RoundView = roundRS => {
             flexDirection: 'column',
           }}>
           <FlatList
-            data={rounds.sort((a, b) =>
+            data = {rounds?.sort((a, b) =>
               a['fixture']['date'] > b['fixture']['date'] ? 1 : -1,
             )}
             renderItem={(item, index) => <FixtureView fixture={item} />}
