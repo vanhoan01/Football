@@ -7,7 +7,7 @@ import Constant from '../../controller/Constant';
 import MatchScreen from '../match/MatchScreen';
 import ChartsScreen from '../charts/ChartsScreen';
 import StatisticsScreen from '../statistics/StatisticsScreen';
-import PlayersScreen from '../players/PlayersScreen';
+import HomeScreen from '../players/components/homeScreen';
 import {StyleSheet, View} from 'react-native';
 import {StackActions, useNavigation} from '@react-navigation/native';
 
@@ -43,7 +43,7 @@ const RootTabNavigator = () => {
                   iconName = focused ? 'stats-chart' : 'stats-chart-outline';
                   break;
 
-                case 'PlayersScreen':
+                case 'HomeScreen':
                   iconName = focused ? 'man' : 'man-outline';
                   break;
               }
@@ -69,7 +69,7 @@ const RootTabNavigator = () => {
           />
           <Tab.Screen
             name={Constant.screenName.Players}
-            component={PlayersScreen}
+            component={HomeScreen}
             options={{headerShown: false, tabBarLabel: 'Cầu thủ'}}
           />
         </Tab.Navigator>
