@@ -42,12 +42,9 @@ const RoundView = roundRS => {
           }}>
           {'Ngày thi đấu ' + rounddt + '/38'}
         </Text>
-        <View
-          style={{
-            flexDirection: 'column',
-          }}>
+        <View>
           <FlatList
-            data = {rounds?.sort((a, b) =>
+            data={rounds?.sort((a, b) =>
               a['fixture']['date'] > b['fixture']['date'] ? 1 : -1,
             )}
             renderItem={(item, index) => <FixtureView fixture={item} />}

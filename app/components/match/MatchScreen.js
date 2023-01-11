@@ -75,13 +75,13 @@ const MatchScreen = () => {
   };
 
   React.useEffect(() => {
-    if (round != '') {
-      getFixturesByRound();
-      console.log('fixtures:');
-      console.log(fixtures);
-    } else {
-      getCurrentRound();
-    }
+    // if (round != '') {
+    //   getFixturesByRound();
+    //   console.log('fixtures:');
+    //   console.log(fixtures);
+    // } else {
+    //   getCurrentRound();
+    // }
   }, [round]);
 
   return (

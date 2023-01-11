@@ -17,6 +17,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import SearchAPIs from '../../../controller/APIs/SearchAPIs';
 import KeyView from '../compoments/KeyView';
+import FixtureView from '../../match/compoments/FixtureView';
 
 const SearchScreen = () => {
   // React.useEffect(() => {}, []);
@@ -29,7 +30,189 @@ const SearchScreen = () => {
   const [keywords, setKeywords] = React.useState([]);
   const [input, setInput] = React.useState();
   const [submit, setSubmit] = React.useState(false);
-  const [teams, setTeams] = React.useState([]);
+  const [teams, setTeams] = React.useState([
+    {
+      code: 'MUN',
+      country: 'England',
+      founded: 1878,
+      id: 33,
+      logo: 'https://media-2.api-sports.io/football/teams/33.png',
+      name: 'Manchester United',
+      national: false,
+    },
+    {
+      code: 'NEW',
+      country: 'England',
+      founded: 1892,
+      id: 34,
+      logo: 'https://media-2.api-sports.io/football/teams/34.png',
+      name: 'Newcastle',
+      national: false,
+    },
+    {
+      code: 'BOU',
+      country: 'England',
+      founded: 1899,
+      id: 35,
+      logo: 'https://media-2.api-sports.io/football/teams/35.png',
+      name: 'Bournemouth',
+      national: false,
+    },
+    {
+      code: 'FUL',
+      country: 'England',
+      founded: 1879,
+      id: 36,
+      logo: 'https://media-3.api-sports.io/football/teams/36.png',
+      name: 'Fulham',
+      national: false,
+    },
+    {
+      code: 'WOL',
+      country: 'England',
+      founded: 1877,
+      id: 39,
+      logo: 'https://media-1.api-sports.io/football/teams/39.png',
+      name: 'Wolves',
+      national: false,
+    },
+    {
+      code: 'LIV',
+      country: 'England',
+      founded: 1892,
+      id: 40,
+      logo: 'https://media-1.api-sports.io/football/teams/40.png',
+      name: 'Liverpool',
+      national: false,
+    },
+    {
+      code: 'SOU',
+      country: 'England',
+      founded: 1885,
+      id: 41,
+      logo: 'https://media-3.api-sports.io/football/teams/41.png',
+      name: 'Southampton',
+      national: false,
+    },
+    {
+      code: 'ARS',
+      country: 'England',
+      founded: 1886,
+      id: 42,
+      logo: 'https://media-1.api-sports.io/football/teams/42.png',
+      name: 'Arsenal',
+      national: false,
+    },
+    {
+      code: 'EVE',
+      country: 'England',
+      founded: 1878,
+      id: 45,
+      logo: 'https://media-2.api-sports.io/football/teams/45.png',
+      name: 'Everton',
+      national: false,
+    },
+    {
+      code: 'LEI',
+      country: 'England',
+      founded: 1884,
+      id: 46,
+      logo: 'https://media-1.api-sports.io/football/teams/46.png',
+      name: 'Leicester',
+      national: false,
+    },
+    {
+      code: 'TOT',
+      country: 'England',
+      founded: 1882,
+      id: 47,
+      logo: 'https://media-1.api-sports.io/football/teams/47.png',
+      name: 'Tottenham',
+      national: false,
+    },
+    {
+      code: 'WES',
+      country: 'England',
+      founded: 1895,
+      id: 48,
+      logo: 'https://media-2.api-sports.io/football/teams/48.png',
+      name: 'West Ham',
+      national: false,
+    },
+    {
+      code: 'CHE',
+      country: 'England',
+      founded: 1905,
+      id: 49,
+      logo: 'https://media-1.api-sports.io/football/teams/49.png',
+      name: 'Chelsea',
+      national: false,
+    },
+    {
+      code: 'MAC',
+      country: 'England',
+      founded: 1880,
+      id: 50,
+      logo: 'https://media-1.api-sports.io/football/teams/50.png',
+      name: 'Manchester City',
+      national: false,
+    },
+    {
+      code: 'BRI',
+      country: 'England',
+      founded: 1901,
+      id: 51,
+      logo: 'https://media-1.api-sports.io/football/teams/51.png',
+      name: 'Brighton',
+      national: false,
+    },
+    {
+      code: 'CRY',
+      country: 'England',
+      founded: 1905,
+      id: 52,
+      logo: 'https://media-2.api-sports.io/football/teams/52.png',
+      name: 'Crystal Palace',
+      national: false,
+    },
+    {
+      code: 'BRE',
+      country: 'England',
+      founded: 1889,
+      id: 55,
+      logo: 'https://media-1.api-sports.io/football/teams/55.png',
+      name: 'Brentford',
+      national: false,
+    },
+    {
+      code: 'LEE',
+      country: 'England',
+      founded: 1919,
+      id: 63,
+      logo: 'https://media-2.api-sports.io/football/teams/63.png',
+      name: 'Leeds',
+      national: false,
+    },
+    {
+      code: 'NOT',
+      country: 'England',
+      founded: 1865,
+      id: 65,
+      logo: 'https://media-3.api-sports.io/football/teams/65.png',
+      name: 'Nottingham Forest',
+      national: false,
+    },
+    {
+      code: 'AST',
+      country: 'England',
+      founded: 1874,
+      id: 66,
+      logo: 'https://media-3.api-sports.io/football/teams/66.png',
+      name: 'Aston Villa',
+      national: false,
+    },
+  ]);
+  let [fixtures, setFixtures] = React.useState([]);
 
   let kwTeams = [
     'Manchester City',
@@ -44,7 +227,9 @@ const SearchScreen = () => {
   kwTeams.forEach(team => {
     let key = team;
     kwTeams.forEach(team => {
-      kwHeadToHead = [...kwHeadToHead, key + ' với ' + team];
+      if (key != team) {
+        kwHeadToHead = [...kwHeadToHead, key + ' với ' + team];
+      }
     });
   });
 
@@ -77,9 +262,61 @@ const SearchScreen = () => {
     setKeywords(keywordsResult);
   };
 
+  search = key => {
+    let keyArr = [];
+    keyArr = key.split('với');
+    keyArr = keyArr?.map(element => element.trim());
+    console.log('keyArr');
+    console.log(keyArr);
+    let key1 = '';
+    let key2 = '';
+    let id1 = 0;
+    let id2 = 0;
+    if (keyArr.length == 2) {
+      key1 = keyArr[0];
+      key2 = keyArr[1];
+      if (key1.length != 0) {
+        let team = teams.find(element => {
+          return element?.name?.toLowerCase().includes(key1.toLowerCase());
+        });
+        console.log('team');
+        console.log(team);
+        id1 = team?.id ? team?.id : 0;
+      }
+      if (key2.length != 0) {
+        let team = teams.find(element => {
+          return element?.name?.toLowerCase().includes(key2.toLowerCase());
+        });
+        id2 = team?.id ? team?.id : 0;
+      }
+    } else if (keyArr.length == 1) {
+      key1 = keyArr[0];
+      if (key1.length != 0) {
+        let team = teams.find(element => {
+          return element?.name?.toLowerCase().includes(key1.toLowerCase());
+        });
+        id1 = team?.id ? team?.id : 0;
+      }
+    }
+    console.log('id1');
+    console.log(id1);
+    console.log('id2');
+    console.log(id2);
+    if (id1 != 0 && id2 != 0) {
+      searchFixturesTwoTeams(id1 + '-' + id2);
+    } else if (id1 != 0) {
+      searchFixturesTeam(id1);
+    } else if (id2 != 0) {
+      searchFixturesTeam(id2);
+    }
+    console.log('data searchFixturesTeam');
+    console.log(fixtures);
+  };
+
   const onSubmit = key => {
     Alert.alert(key);
     setSubmit(true);
+    search(key);
   };
   const onSelectKey = key => {
     // setInput(key);
@@ -87,24 +324,57 @@ const SearchScreen = () => {
     setInput(key);
     getKeywords(key);
     setSubmit(true);
+    search(key);
   };
 
   let searchTeam = async () => {
     try {
       let data = await SearchAPIs.searchTeam();
-      setTeams(data?.response);
+      let map = data?.response?.map(element => element?.team);
+      // teams = map;
+      setTeams(map);
       console.log('data searchTeam');
-      console.log(data?.response);
-      console.log(teams);
+      console.log(map);
+      if (teams[0] != null) {
+        console.log(teams);
+      }
     } catch (error) {
       console.log(error);
       setTeams([]);
     }
   };
 
+  let searchFixturesTeam = async id => {
+    try {
+      let data = await SearchAPIs.searchFixturesTeam(id);
+      setFixtures(data?.response);
+      console.log('data searchFixturesTeam');
+      console.log(data?.response);
+      console.log(fixtures);
+    } catch (error) {
+      console.log(error);
+      setFixtures([]);
+    }
+  };
+
+  let searchFixturesTwoTeams = async h2h => {
+    try {
+      let data = await SearchAPIs.searchFixturesTwoTeams(h2h);
+      setFixtures(data?.response);
+      console.log('data searchFixturesTeam');
+      console.log(data?.response);
+      console.log(fixtures);
+    } catch (error) {
+      console.log(error);
+      setFixtures([]);
+    }
+  };
+
   React.useEffect(() => {
     getKeywords('');
-    searchTeam();
+    // searchTeam();
+    console.log('teams');
+    console.log(teams);
   }, []);
 
   return (
@@ -186,7 +456,25 @@ const SearchScreen = () => {
         </View>
 
         {submit ? (
-          <View></View>
+          <View
+            style={{
+              marginBottom: 15,
+            }}>
+            <Text
+              style={{
+                fontSize: 14,
+                color: 'black',
+              }}>
+              Trận đấu
+            </Text>
+            <FlatList
+              data={fixtures?.sort((a, b) =>
+                a['fixture']['date'] > b['fixture']['date'] ? 1 : -1,
+              )}
+              renderItem={(item, index) => <FixtureView fixture={item} />}
+              numColumns={1}
+            />
+          </View>
         ) : (
           <View>
             <FlatList
