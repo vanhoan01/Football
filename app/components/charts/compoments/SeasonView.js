@@ -81,7 +81,9 @@ const SeasonView = roundRS => {
           style={{
             width: 200,
           }}>
-          <View>
+           <ScrollView 
+          horizontal>
+            <View>
             <View
               style={{
                 flexDirection: 'column',
@@ -146,8 +148,13 @@ const SeasonView = roundRS => {
               />
             </View>
           </View>
+
+          </ScrollView>
+          
         </View>
+
       </View>
+
       <View
         style={{
           height: 300,

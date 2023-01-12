@@ -30,5 +30,6 @@ export default {
     FixtureDetails: 'FixtureDetailsScreen',
     RootTabNavigator: 'RootTabNavigator',
     Search: 'SearchScreen',
+    MathTeam: 'MathTeamScreen',
   },
 };

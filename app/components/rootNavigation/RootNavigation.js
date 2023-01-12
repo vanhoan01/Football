@@ -9,6 +9,7 @@ import Constant from '../../controller/Constant';
 import FixtureDetailsScreen from '../match/screens/FixtureDetailsScreen';
 import RootTabNavigator from './RootTabNavigator';
 import SearchScreen from '../search/screens/SearchScreen';
+import MathTeamScreen from '../charts/screens/MathTeamScreen'
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,10 @@ const RootNavigation = () => {
           name={Constant.screenName.Search}
           component={SearchScreen}
           options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name={Constant.screenName.MathTeam}
+          component={MathTeamScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

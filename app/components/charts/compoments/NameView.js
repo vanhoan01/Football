@@ -11,13 +11,15 @@ import {
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-// import Constant from '../../controller/Constant';
+import Constant from '../../../controller/Constant';
 
 const NameView = ({fixture}) => {
   let data = fixture?.item;
+  
   console.log('data name');
-  console.log(data);
+  console.log(data.team.id);
 
+  let id = data?.team?.id;
   let rank =
   data?.rank == null
     ? 1
@@ -46,6 +48,15 @@ const NameView = ({fixture}) => {
   data.team?.name== null
     ? 'NA'
     : data.team?.name.toString();
+
+    const navigation = useNavigation();
+    const showMathTeam = () => {
+    navigation.dispatch(
+      StackActions.push(Constant.screenName.MathTeam, {id}),
+    );
+  };
+    
+
   return (
     <View 
     style={{
@@ -73,30 +84,32 @@ const NameView = ({fixture}) => {
               paddingVertical: 4,
               //backgroundColor: 'blue',
             }}>
-            <View
-              style={{
-                  flexDirection: 'row',
-                  paddingVertical: 5,
-                  alignItems: 'center',
-                  marginHorizontal:5,
-              }}>
-              <Text style={{
-                width:18,
-                color:'black',
-                fontSize:14,
-              }}>
-                {rank}
-              </Text>
-              <Image
-                style={styles.imageThumbnail}
-                source={{
-                  uri: Logo,
-                }}
-              />
-              <Text style={styles.text}>
-                {name}
-              </Text>
-            </View>
+            <TouchableOpacity onPress={showMathTeam}>
+              <View
+                style={{
+                    flexDirection: 'row',
+                    paddingVertical: 5,
+                    alignItems: 'center',
+                    marginHorizontal:5,
+                }}>
+                <Text style={{
+                  width:18,
+                  color:'black',
+                  fontSize:14,
+                }}>
+                  {rank}
+                </Text>
+                <Image
+                  style={styles.imageThumbnail}
+                  source={{
+                    uri: Logo,
+                  }}
+                />
+                <Text style={styles.text}>
+                  {name}
+                </Text>
+              </View>
+            </TouchableOpacity>
           </View>
       </View>
     </View>
