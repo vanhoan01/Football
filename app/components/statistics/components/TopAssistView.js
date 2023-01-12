@@ -1,48 +1,44 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, Dimensions} from 'react-native';
 import React from 'react';
-
-const TopAssistView = ({assist}) => {
-  let data = assist?.item;
-  var name = data.player?.name.toString();
-  var avatar = data.player?.photo.toString();
-  var team = data.statistics?.team.name.toString();
-  var logoTeam = data.statistics?.team.logo.toString();
-  var assists = data.statistics?.goals.assists.toString();
+import Constant from '../../../controller/Constant';
+const TopAssistView = ({assists}) => {
+  console.log('hahaha', assists?.item);
   return (
     <View style={styles.rootView}>
-      <View>
-        <Text style={styles.firstText}>Số lần chuyền bóng</Text>
-      </View>
-      <View style={styles.viewH}>
-        <View style={styles.viewP}>
-          <Text style={styles.firstText1}>Cầu thủ</Text>
-        </View>
-        <View style={styles.viewG}>
-          <Text style={styles.firstText1}>Số lần chuyền bóng</Text>
-        </View>
-      </View>
       <View style={styles.viewTong}>
         <View style={styles.viewTong2}>
           <View style={styles.view}></View>
         </View>
         <View style={styles.root}>
           <View style={styles.root1}>
-            <Text style={styles.textId}>1</Text>
+            <Text style={styles.textId}></Text>
           </View>
           <View style={styles.viewImg}>
-            <Image source={{uri: avatar}} style={styles.img} />
+            <Image
+              source={{uri: assists?.item?.player?.photo}}
+              style={styles.img}
+            />
           </View>
           <View style={styles.viewInfo}>
             <View style={styles.viewInfo1}>
-              <Text style={styles.textPlayer}>{name}</Text>
+              <Text style={styles.textPlayer}>
+                {assists?.item?.player?.name}
+              </Text>
               <View style={styles.viewLogo}>
-                <Image source={{uri: logoTeam}} style={styles.logo} />
-                <Text style={styles.textTeam}>{team}</Text>
+                <Image
+                  source={{uri: assists?.item?.statistics[0]?.team?.logo}}
+                  style={styles.logo}
+                />
+                <Text style={styles.textTeam}>
+                  {assists?.item?.statistics[0]?.team?.name}
+                </Text>
               </View>
             </View>
           </View>
           <View style={styles.viewGoal}>
-            <Text style={styles.textGoal}>{assists}</Text>
+            <Text style={styles.textGoal}>
+              {assists?.item?.statistics[0]?.goals?.assists}
+            </Text>
           </View>
         </View>
         <View style={styles.viewTong2}>

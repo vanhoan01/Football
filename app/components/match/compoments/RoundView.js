@@ -11,20 +11,25 @@ import {
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FixtureView from './FixtureView';
+// import {FlatList} from 'react-native-bidirectional-infinite-scroll';
 
 // import Constant from '../../controller/Constant';
 
 const RoundView = roundRS => {
-  console.log('roundRS.parameters:');
-  // let parameters = JSON.parse(roundRS.roundRS.parameters);
-  // console.log(roundRS.roundRS.parameters.round);
-  // let round = roundRS?.roundRS.parameters.round;
-  // let round = '10';
-  // console.log('round');
-  // console.log(round);
-  let rounds = roundRS?.roundRS.response;
-  // console.log('rounds');
-  // console.log(rounds);
+  let data = roundRS?.roundRS;
+  // let rounddt = data.parameters.round.toString().substring(17);
+
+  let rounddt = '35';
+  try {
+    let parameters = data?.parameters;
+    console.log('data.parameters');
+    console.log(parameters?.round);
+    rounddt = parameters?.round.substring(17);
+  } catch (error) {
+    console.log(error);
+  }
+
+  let rounds = data.response;
   return (
     <View style={{}}>
       <View>
@@ -35,14 +40,13 @@ const RoundView = roundRS => {
             marginVertical: 14,
             paddingHorizontal: 8,
           }}>
-          Ngày thi đấu 10/38
+          {'Ngày thi đấu ' + rounddt + '/38'}
         </Text>
-        <View
-          style={{
-            flexDirection: 'column',
-          }}>
+        <View>
           <FlatList
-            data={rounds}
+            data={rounds?.sort((a, b) =>
+              a['fixture']['date'] > b['fixture']['date'] ? 1 : -1,
+            )}
             renderItem={(item, index) => <FixtureView fixture={item} />}
             numColumns={1}
           />

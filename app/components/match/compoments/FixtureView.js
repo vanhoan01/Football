@@ -11,35 +11,59 @@ import {
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-// import Constant from '../../controller/Constant';
+import Constant from '../../../controller/Constant';
 
 const FixtureView = ({fixture}) => {
   let data = fixture?.item;
   // console.log('data');
   // console.log(data);
-  let homeLogo =
-    data.teams?.home?.logo == null
-      ? 'https://upload.wikimedia.org/wikipedia/vi/thumb/1/1d/Manchester_City_FC_logo.svg/180px-Manchester_City_FC_logo.svg.png'
-      : data.teams?.home?.logo.toString();
+  let id = data?.fixture?.id;
+  let status = data.score?.fulltime?.home == null ? false : true;
+  let homeLogo = data.teams?.home?.logo.toString();
+  let awayLogo = data.teams?.away?.logo.toString();
+  let homeName = data.teams?.home?.name.toString();
+  let awayName = data.teams?.away?.name.toString();
+  let homeGoals = '';
+  let awayGoals = '';
+  let datedt = '';
+  try {
+    datedt = data?.fixture?.date;
+  } catch (error) {
+    // datedt = '2022-11-30T20:00:00+00:00';
+    print(error);
+  }
 
-  let awayLogo =
-    data.teams?.away?.logo == null
-      ? 'https://upload.wikimedia.org/wikipedia/vi/thumb/1/1d/Manchester_City_FC_logo.svg/180px-Manchester_City_FC_logo.svg.png'
-      : data.teams?.away?.logo.toString();
-  console.log('awayLogo');
-  console.log(awayLogo);
-  var homeName = data.teams?.home.name.toString();
-  console.log('homeName');
-  console.log(homeName);
-  var awayName = data.teams?.away.name.toString();
-  console.log('awayName');
-  console.log(awayName);
-  var homeGoals = data.goals?.home.toString();
-  var awayGoals = data.goals?.away.toString();
-  // var date = data.fixture.date.substr(0, 10);
-  var status = data.score?.fulltime.home == null ? false : true;
+  let day =
+    datedt?.toString().substring(8, 8 + 2) + '/' + datedt?.substring(5, 5 + 2);
+  let hour = datedt?.toString().substring(11, 11 + 5);
+
+  let textTime1 = '';
+  let textTime2 = '';
+  let win = 0;
+
+  if (status) {
+    homeGoals = data.goals?.home;
+    awayGoals = data.goals?.away;
+    textTime1 = 'KT';
+    textTime2 = day;
+    if (homeGoals > awayGoals) {
+      win = 1;
+    } else if (homeGoals < awayGoals) {
+      win = -1;
+    }
+  } else {
+    textTime1 = day;
+    textTime2 = hour;
+  }
+
+  const navigation = useNavigation();
+  const showFixtureDetails = () => {
+    navigation.dispatch(
+      StackActions.push(Constant.screenName.FixtureDetails, {id}),
+    );
+  };
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={showFixtureDetails}>
       <View
         style={{
           flexDirection: 'row',
@@ -74,6 +98,7 @@ const FixtureView = ({fixture}) => {
               style={{
                 flex: 1,
                 fontSize: 14,
+                color: win == -1 ? 'gray' : 'black',
               }}>
               {homeName}
             </Text>
@@ -81,8 +106,9 @@ const FixtureView = ({fixture}) => {
               style={{
                 fontSize: 14,
                 marginHorizontal: 5,
+                color: win == -1 ? 'gray' : 'black',
               }}>
-              {status == true ? homeGoals : null}
+              {homeGoals}
             </Text>
             <View
               style={{
@@ -90,10 +116,8 @@ const FixtureView = ({fixture}) => {
                 alignItems: 'center',
                 justifyContent: 'center',
               }}>
-              {status == true ? (
-                awayGoals > homeGoals ? (
-                  <Ionicons name="caret-back-sharp" size={13} color="black" />
-                ) : null
+              {win == 1 ? (
+                <Ionicons name="caret-back-sharp" size={13} color="black" />
               ) : null}
             </View>
           </View>
@@ -114,18 +138,18 @@ const FixtureView = ({fixture}) => {
               style={{
                 flex: 1,
                 fontSize: 14,
-                color: 'black',
+                color: win == 1 ? 'gray' : 'black',
               }}>
               {awayName}
             </Text>
             <Text
               style={{
                 fontSize: 14,
-                color: 'black',
+                color: win == 1 ? 'gray' : 'black',
                 // backgroundColor: 'blue',
                 marginHorizontal: 5,
               }}>
-              {status == true ? awayGoals : null}
+              {awayGoals}
             </Text>
             <View
               style={{
@@ -135,10 +159,8 @@ const FixtureView = ({fixture}) => {
                 justifyContent: 'center',
                 // backgroundColor: 'red',
               }}>
-              {status == true ? (
-                awayGoals > homeGoals ? (
-                  <Ionicons name="caret-back-sharp" size={13} color="black" />
-                ) : null
+              {win == -1 ? (
+                <Ionicons name="caret-back-sharp" size={13} color="black" />
               ) : null}
             </View>
           </View>
@@ -163,14 +185,15 @@ const FixtureView = ({fixture}) => {
               color: 'black',
               fontWeight: '500',
             }}>
-            KT
+            {textTime1}
           </Text>
           <Text
             style={{
               fontSize: 13,
               fontWeight: '500',
+              color: 'black',
             }}>
-            Hôm qua
+            {textTime2}
           </Text>
         </View>
       </View>

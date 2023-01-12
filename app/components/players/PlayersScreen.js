@@ -8,11 +8,12 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
+import {MatchAPIs} from '../../controller/APIs/MatchAPIs';
 
 const PlayersScreen = () => {
   return (
     <View>
-      <Text>Cầu thủ</Text>
+      <Text>hehehhe</Text>
     </View>
   );
 };

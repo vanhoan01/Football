@@ -1,71 +1,45 @@
 import * as React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {
+  NavigationContainer,
+  useNavigationContainerRef,
+} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import HomeScreen from '../home/components/HomeScreen';
-import LoginScreen from '../authentication/login/LoginScreen';
-import DetailScreen from '../garage/DetailScreen';
 import Constant from '../../controller/Constant';
-import UsersScreen from '../users/UsersScreen';
-import UserDetailScreen from '../users/UserDetailScreen';
-import MatchScreen from '../match/MatchScreen';
-import ChartsScreen from '../charts/ChartsScreen';
-import StatisticsScreen from '../statistics/StatisticsScreen';
-import PlayersScreen from '../players/PlayersScreen';
-
+import Teams from '../players/screens/ListPlayer';
+import FixtureDetailsScreen from '../match/screens/FixtureDetailsScreen';
+import RootTabNavigator from './RootTabNavigator';
+import SearchScreen from '../search/screens/SearchScreen';
+import TopScoreScreens from '../statistics/Screens/TopScoreScreens';
+import TopAssistsScreens from '../statistics/Screens/TopAssistsScreens';
+import TopRedCardScreens from '../statistics/Screens/TopRedCardScreens';
+import TopYellowCardScreens from '../statistics/Screens/TopYellowCardScreens';
 const Stack = createNativeStackNavigator();
 
 const RootNavigation = () => {
+  const navigationRef = useNavigationContainerRef();
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName={Constant.screenName.Home}>
+    <NavigationContainer ref={navigationRef}>
+      <Stack.Navigator>
         <Stack.Screen
-          name={Constant.screenName.Login}
-          component={LoginScreen}
+          name={Constant.screenName.RootTabNavigator}
+          component={RootTabNavigator}
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name={Constant.screenName.Home}
-          component={HomeScreen}
+          name={Constant.screenName.FixtureDetails}
+          component={FixtureDetailsScreen}
+        />
+        <Stack.Screen
+          name={Constant.screenName.Search}
+          component={SearchScreen}
           options={{headerShown: false}}
         />
-
-        <Stack.Screen
-          name={Constant.screenName.Detail}
-          component={DetailScreen}
-        />
-
-        <Stack.Screen
-          name={Constant.screenName.Users}
-          component={UsersScreen}
-          options={{headerShown: false}}
-        />
-
-        <Stack.Screen
-          name={Constant.screenName.UserDetail}
-          component={UserDetailScreen}
-          options={{title: 'User Detail'}}
-        />
-        <Stack.Screen
-          name={Constant.screenName.Match}
-          component={MatchScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name={Constant.screenName.Charts}
-          component={ChartsScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name={Constant.screenName.Statistics}
-          component={StatisticsScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name={Constant.screenName.Players}
-          component={PlayersScreen}
-          options={{headerShown: false}}
-        />
+        <Stack.Screen name={Constant.screenName.Teams} component={Teams} />
+        <Stack.Screen name="Score" component={TopScoreScreens} />
+        <Stack.Screen name="Assist" component={TopAssistsScreens} />
+        <Stack.Screen name="RedCard" component={TopRedCardScreens} />
+        <Stack.Screen name="YellowCard" component={TopYellowCardScreens} />
       </Stack.Navigator>
     </NavigationContainer>
   );
