@@ -9,7 +9,7 @@ export default class SearchAPIs {
       'https://api-football-v1.p.rapidapi.com/v3/fixtures/headtohead',
   };
 
-  static searchPlayer = async (search = '') => {
+  static searchPlayer = async search => {
     try {
       let reponse = await axios.get(
         this.endpoints.searchPlayer + '?league=39' + '&search=' + search,

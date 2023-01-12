@@ -213,7 +213,8 @@ const SearchScreen = () => {
     },
   ]);
   let [fixtures, setFixtures] = React.useState([]);
-
+  let [players, setPlayers] = React.useState([]);
+  const [tab, setTab] = React.useState(0);
   let kwTeams = [
     'Manchester City',
     'Manchester United',
@@ -370,6 +371,19 @@ const SearchScreen = () => {
     }
   };
 
+  let searchPlayer = async search => {
+    try {
+      let data = await SearchAPIs.searchPlayer(search);
+      setPlayers(data?.response);
+      console.log('data searchFixturesTeam');
+      console.log(data?.response);
+      console.log(fixtures);
+    } catch (error) {
+      console.log(error);
+      setPlayers([]);
+    }
+  };
+
   React.useEffect(() => {
     getKeywords('');
     // searchTeam();
@@ -459,14 +473,37 @@ const SearchScreen = () => {
           <View
             style={{
               marginBottom: 15,
+              flexDirection: 'column',
             }}>
-            <Text
+            <View
               style={{
-                fontSize: 14,
-                color: 'black',
+                flexDirection: 'row',
               }}>
-              Trận đấu
-            </Text>
+              <View
+                style={{
+                  flexDirection: 'column',
+                  width: 50,
+                }}>
+                <Text>Trận đấu</Text>
+                <View
+                  style={{
+                    height: 3,
+                    flex: 1,
+                  }}></View>
+              </View>
+              <View
+                style={{
+                  flexDirection: 'column',
+                  width: 50,
+                }}>
+                <Text>Cầu thủ</Text>
+                <View
+                  style={{
+                    height: 3,
+                    flex: 1,
+                  }}></View>
+              </View>
+            </View>
             <FlatList
               data={fixtures?.sort((a, b) =>
                 a['fixture']['date'] > b['fixture']['date'] ? 1 : -1,
