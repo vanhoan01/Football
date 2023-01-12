@@ -10,6 +10,7 @@ import Teams from '../players/screens/ListPlayer';
 import FixtureDetailsScreen from '../match/screens/FixtureDetailsScreen';
 import RootTabNavigator from './RootTabNavigator';
 import SearchScreen from '../search/screens/SearchScreen';
+import MathTeamScreen from '../charts/screens/MathTeamScreen'
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +32,10 @@ const RootNavigation = () => {
           name={Constant.screenName.Search}
           component={SearchScreen}
           options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name={Constant.screenName.MathTeam}
+          component={MathTeamScreen}
         />
         <Stack.Screen name={Constant.screenName.Teams} component={Teams} />
       </Stack.Navigator>
