@@ -9,7 +9,7 @@ export default class SearchAPIs {
       'https://api-football-v1.p.rapidapi.com/v3/fixtures/headtohead',
   };
 
-  static searchPlayer = async (search = '') => {
+  static searchPlayer = async search => {
     try {
       let reponse = await axios.get(
         this.endpoints.searchPlayer + '?league=39' + '&search=' + search,
@@ -47,7 +47,7 @@ export default class SearchAPIs {
     }
   };
 
-  static searchFixturesTeam = async (team = '33') => {
+  static searchFixturesTeam = async team => {
     try {
       let reponse = await axios.get(
         this.endpoints.searchFixturesTeam +
@@ -68,12 +68,10 @@ export default class SearchAPIs {
     }
   };
 
-  static searchFixturesTwoTeams = async (team = '33') => {
+  static searchFixturesTwoTeams = async h2h => {
     try {
       let reponse = await axios.get(
-        this.endpoints.searchFixturesTwoTeams +
-          '?league=39&season=2022&team=' +
-          team,
+        this.endpoints.searchFixturesTwoTeams + '?h2h=' + h2h,
         {
           headers: {
             'X-RapidAPI-Key': API.headers.XRapidAPIKey,
