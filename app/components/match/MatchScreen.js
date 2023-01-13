@@ -46,7 +46,7 @@ const MatchScreen = () => {
       console.log('fixtures data:');
       console.log(data);
       setFixtures(data);
-      setFixtures(data);
+      // setFixtures(data);
     } catch (error) {
       console.log(error);
       setFixtures([]);

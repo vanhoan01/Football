@@ -69,7 +69,7 @@ const FixtureDetailsScreen = () => {
       if (event.type == 'Goal' && event['team']['name'] == result.homeName) {
         homeGoalsData = [
           ...homeGoalsData,
-          event.assist['name'] + ' ' + event.time['elapsed'] + "'",
+          event.player['name'] + ' ' + event.time['elapsed'] + "'",
         ];
       }
     });
@@ -78,7 +78,7 @@ const FixtureDetailsScreen = () => {
       if (event['type'] == 'Goal' && event['team']['name'] == result.awayName) {
         awayGoalsData = [
           ...awayGoalsData,
-          event['assist']['name'] + ' ' + event['time']['elapsed'] + "'",
+          event['player']['name'] + ' ' + event['time']['elapsed'] + "'",
         ];
       }
     });
@@ -221,10 +221,11 @@ const FixtureDetailsScreen = () => {
         <FlatList
           style={styles.scrollView}
           data={[0]}
+          // listKey={index => `_key${index.toString()}`}
+          // keyExtractor={index => `_keyex${index.toString()}`}
           renderItem={item => (
-            <View key={keyFL[9]}>
+            <View key="key1">
               <View
-                key={keyFL[0]}
                 style={{
                   flexDirection: 'column',
                   backgroundColor: 'white',
@@ -317,9 +318,9 @@ const FixtureDetailsScreen = () => {
                 {/* view tỉ số */}
                 {status == true ? (
                   result?.homeGoals == 0 && result?.awayGoals == 0 ? (
-                    <View key={keyFL[5]}></View>
+                    <View></View>
                   ) : (
-                    <View key={keyFL[1]}>
+                    <View>
                       {/* line */}
                       <View style={styles.line}></View>
                       {/* line */}
@@ -336,8 +337,10 @@ const FixtureDetailsScreen = () => {
                             flexDirection: 'column',
                             flex: 1,
                           }}>
-                          {homeGoals?.map(goal => (
-                            <Text style={styles.playerGoalsText1}>
+                          {homeGoals?.map((goal, index) => (
+                            <Text
+                              style={styles.playerGoalsText1}
+                              key={`home${index.toString()}`}>
                               {goal ? goal : ''}
                             </Text>
                           ))}
@@ -350,8 +353,10 @@ const FixtureDetailsScreen = () => {
                             flex: 1,
                             alignItems: 'flex-end',
                           }}>
-                          {awayGoals?.map(goal => (
-                            <Text style={styles.playerGoalsText1}>
+                          {awayGoals?.map((goal, index) => (
+                            <Text
+                              style={styles.playerGoalsText1}
+                              key={`away${index.toString()}`}>
                               {goal ? goal : ''}
                             </Text>
                           ))}
@@ -361,14 +366,13 @@ const FixtureDetailsScreen = () => {
                     </View>
                   )
                 ) : (
-                  <View key={keyFL[4]}></View>
+                  <View></View>
                 )}
                 {/* line */}
-                <View key={keyFL[6]} style={styles.line}></View>
+                <View style={styles.line}></View>
                 {/* line */}
                 {/* view sân vận động */}
                 <View
-                  key={keyFL[7]}
                   style={{
                     flexDirection: 'column',
                     marginVertical: 15,
@@ -404,7 +408,6 @@ const FixtureDetailsScreen = () => {
               {/* view thống kê trận đấu */}
               {status ? (
                 <View
-                  key={keyFL[2]}
                   style={{
                     flexDirection: 'column',
                     marginTop: 15,
@@ -443,14 +446,17 @@ const FixtureDetailsScreen = () => {
                   </View>
                   <FlatList
                     data={statisticsDT}
-                    renderItem={item => <StatisticView statistic={item} />}
+                    listKey={index => `_key${index.toString()}`}
+                    // keyExtractor={index => `extractor${index.toString()}`}
+                    renderItem={(item, index) => (
+                      <StatisticView statistic={item} key={index} />
+                    )}
                     numColumns={1}
                     keyExtractor={item => item.type}
                   />
                 </View>
               ) : (
                 <View
-                  key={keyFL[3]}
                   style={{
                     flexDirection: 'column',
                     marginTop: 15,

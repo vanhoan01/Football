@@ -18,6 +18,8 @@ import Feather from 'react-native-vector-icons/Feather';
 import SearchAPIs from '../../../controller/APIs/SearchAPIs';
 import KeyView from '../compoments/KeyView';
 import FixtureView from '../../match/compoments/FixtureView';
+import PlayerItem from '../compoments/PlayerItem';
+import {blueA700} from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
 
 const SearchScreen = () => {
   // React.useEffect(() => {}, []);
@@ -214,6 +216,7 @@ const SearchScreen = () => {
   ]);
   let [fixtures, setFixtures] = React.useState([]);
   let [players, setPlayers] = React.useState([]);
+  // let players = [];
   const [tab, setTab] = React.useState(0);
   let kwTeams = [
     'Manchester City',
@@ -315,15 +318,18 @@ const SearchScreen = () => {
   };
 
   const onSubmit = key => {
-    Alert.alert(key);
+    // Alert.alert(key);
     setSubmit(true);
+    setKeyword(key);
+    setTab(0);
     search(key);
   };
   const onSelectKey = key => {
-    // setInput(key);
-    Alert.alert(key);
+    // Alert.alert(key);
     setInput(key);
-    getKeywords(key);
+    // getKeywords(key);
+    setTab(0);
+    setKeyword(key);
     setSubmit(true);
     search(key);
   };
@@ -371,16 +377,20 @@ const SearchScreen = () => {
     }
   };
 
-  let searchPlayer = async search => {
+  let searchPlayer = async () => {
     try {
-      let data = await SearchAPIs.searchPlayer(search);
+      let data = await SearchAPIs.searchPlayer(keyword);
       setPlayers(data?.response);
-      console.log('data searchFixturesTeam');
+      players = data?.response;
+      console.log('keyword');
+      console.log(keyword);
+      console.log('data searchPlayer');
       console.log(data?.response);
-      console.log(fixtures);
+      console.log(players);
     } catch (error) {
       console.log(error);
       setPlayers([]);
+      // players = [];
     }
   };
 
@@ -404,6 +414,7 @@ const SearchScreen = () => {
             justifyContent: 'space-between',
             alignItems: 'center',
             height: 56,
+            backgroundColor: 'white',
           }}>
           <View
             style={{
@@ -439,8 +450,7 @@ const SearchScreen = () => {
                 console.log(text ? text : '');
                 getKeywords(text);
                 setInput(text);
-
-                // getKeywords();
+                setKeyword(text);
               }}
               onFocus={() => {
                 setSubmit(false);
@@ -478,39 +488,95 @@ const SearchScreen = () => {
             <View
               style={{
                 flexDirection: 'row',
+                marginBottom: 10,
+                backgroundColor: 'white',
               }}>
-              <View
-                style={{
-                  flexDirection: 'column',
-                  width: 50,
+              <TouchableOpacity
+                onPress={() => {
+                  setTab(0);
+                  search(keyword);
                 }}>
-                <Text>Trận đấu</Text>
                 <View
                   style={{
-                    height: 3,
-                    flex: 1,
-                  }}></View>
-              </View>
-              <View
-                style={{
-                  flexDirection: 'column',
-                  width: 50,
+                    flexDirection: 'column',
+                    width: 100,
+                  }}>
+                  <Text
+                    style={{
+                      color: 'black',
+                      fontWeight: '500',
+                      textAlign: 'center',
+                      fontSize: 16,
+                      paddingVertical: 5,
+                      color: tab == 0 ? 'blue' : 'black',
+                    }}>
+                    Trận đấu
+                  </Text>
+                  {tab == 0 ? (
+                    <View
+                      style={{
+                        height: 3,
+                        backgroundColor: 'blue',
+                      }}></View>
+                  ) : (
+                    <View></View>
+                  )}
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setTab(1);
+                  searchPlayer(keyword);
                 }}>
-                <Text>Cầu thủ</Text>
                 <View
                   style={{
-                    height: 3,
-                    flex: 1,
-                  }}></View>
-              </View>
+                    flexDirection: 'column',
+                    width: 100,
+                  }}>
+                  <Text
+                    style={{
+                      color: 'black',
+                      fontWeight: '500',
+                      textAlign: 'center',
+                      fontSize: 16,
+                      paddingVertical: 5,
+                      color: tab == 1 ? 'blue' : 'black',
+                    }}>
+                    Cầu thủ
+                  </Text>
+                  {tab == 1 ? (
+                    <View
+                      style={{
+                        height: 3,
+                        backgroundColor: 'blue',
+                      }}></View>
+                  ) : (
+                    <View></View>
+                  )}
+                </View>
+              </TouchableOpacity>
             </View>
-            <FlatList
-              data={fixtures?.sort((a, b) =>
-                a['fixture']['date'] > b['fixture']['date'] ? 1 : -1,
+            <View
+              style={{
+                paddingHorizontal: 10,
+                marginBottom: 10,
+              }}>
+              {tab == 0 ? (
+                <FlatList
+                  data={fixtures?.sort((a, b) =>
+                    a['fixture']['date'] > b['fixture']['date'] ? 1 : -1,
+                  )}
+                  renderItem={(item, index) => <FixtureView fixture={item} />}
+                  numColumns={1}
+                />
+              ) : (
+                <FlatList
+                  data={players}
+                  renderItem={(item, index) => <PlayerItem player={item} />}
+                  numColumns={1}
+                />
               )}
-              renderItem={(item, index) => <FixtureView fixture={item} />}
-              numColumns={1}
-            />
+            </View>
           </View>
         ) : (
           <View>

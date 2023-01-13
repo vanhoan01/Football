@@ -3,10 +3,12 @@ import * as React from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import Constant from '../../controller/Constant';
+import Constant from '../../../controller/Constant';
 
 const PlayerItem = ({player}) => {
-  player = player.item;
+  console.log('player');
+  console.log(player);
+  player = player?.item;
   const navigation = useNavigation();
   const showUserDetail = () => {
     // navigation

@@ -21,7 +21,8 @@ const StatisticView = ({statistic}) => {
       style={{
         flexDirection: 'row',
         justifyContent: 'space-between',
-      }}>
+      }}
+      key={data?.type}>
       <Text style={styles.statisticValue}>{data?.home}</Text>
       <Text style={styles.statisticType}>{data?.type}</Text>
       <Text style={styles.statisticValue}>{data?.away}</Text>
