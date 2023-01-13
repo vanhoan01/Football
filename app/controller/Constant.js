@@ -13,6 +13,10 @@ export default {
     img595097: require('../assets/images/img_595097.jpg'),
     mercedes: require('../assets/images/img_mercedes.jpg'),
     bmw: require('../assets/images/img_bmw.png'),
+    score: require('../assets/images/score.png'),
+    assists: require('../assets/images/98611.png'),
+    yellowcard: require('../assets/images/yellowcard.png'),
+    redcard: require('../assets/images/redcard.png'),
   },
   fonts: {
     notoSansJPBold: 'NotoSansJP-Bold',
