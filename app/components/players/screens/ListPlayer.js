@@ -6,7 +6,6 @@ import ProfilePlayer from './ProfilePlayer';
 
 const ListPlayer = () => {
   const [squads, setSquads] = useState([]);
-
   const route = useRoute();
   const data = route.params?.id;
 
@@ -19,7 +18,7 @@ const ListPlayer = () => {
       console.log(error);
     }
   };
-  React.useEffect(() => {
+  useEffect(() => {
     getSquads();
   }, []);
 

@@ -9,10 +9,6 @@ const DetailList = ({team}) => {
   const handleShowProfile = () => {
     navigation.dispatch(StackActions.push(Constant.screenName.Teams, {id}));
   };
-  useEffect(() => {
-    console.log('lIst : ', team.team);
-  }, []);
-
   return (
     <TouchableOpacity onPress={handleShowProfile} style={styles.touch}>
       <Image style={styles.logo} source={{uri: team.team.logo}} />

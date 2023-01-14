@@ -7,6 +7,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import Constant from '../../controller/Constant';
 import Teams from '../players/screens/ListPlayer';
+import DetailPlayer from '../players/screens/DetailPlayer';
 import FixtureDetailsScreen from '../match/screens/FixtureDetailsScreen';
 import RootTabNavigator from './RootTabNavigator';
 import SearchScreen from '../search/screens/SearchScreen';
@@ -40,6 +41,10 @@ const RootNavigation = () => {
         <Stack.Screen
           name={Constant.screenName.MathTeam}
           component={MathTeamScreen}
+        />
+        <Stack.Screen
+          name={Constant.screenName.DetailPlayer}
+          component={DetailPlayer}
         />
         <Stack.Screen name={Constant.screenName.Teams} component={Teams} />
         <Stack.Screen name="Score" component={TopScoreScreens} />
