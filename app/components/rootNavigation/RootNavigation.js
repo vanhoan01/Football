@@ -42,12 +42,18 @@ const RootNavigation = () => {
         <Stack.Screen
           name={Constant.screenName.MathTeam}
           component={MathTeamScreen}
+          options={{title: 'Trận đấu Đội bóng'}}
         />
         <Stack.Screen
           name={Constant.screenName.DetailPlayer}
           component={DetailPlayer}
+          options={{title: 'Thông tin cầu thủ'}}
         />
-        <Stack.Screen name={Constant.screenName.Teams} component={Teams} />
+        <Stack.Screen
+          name={Constant.screenName.Teams}
+          component={Teams}
+          options={{title: 'Cầu thủ'}}
+        />
         <Stack.Screen name="Score" component={TopScoreScreens} />
         <Stack.Screen name="Assist" component={TopAssistsScreens} />
         <Stack.Screen name="RedCard" component={TopRedCardScreens} />

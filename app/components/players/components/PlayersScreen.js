@@ -3,7 +3,7 @@ import {View, StyleSheet, Text, FlatList} from 'react-native';
 import DetailList from './detailList';
 import MatchAPIs from '../../../controller/APIs/MatchAPIs';
 
-const HomeScreen = () => {
+const PlayersScreen = () => {
   const [team, setTeam] = React.useState([]);
 
   // get teams
@@ -33,4 +33,4 @@ const HomeScreen = () => {
 
 const styles = StyleSheet.create({});
 
-export default HomeScreen;
+export default PlayersScreen;
