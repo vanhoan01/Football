@@ -1,52 +1,40 @@
 import * as React from 'react';
 import {
   View,
-  Text,
   FlatList,
   StyleSheet,
-  Image,
-  TouchableOpacity,
   ActivityIndicator,
   Alert,
 } from 'react-native';
-// import {FlatList} from 'react-native-bidirectional-infinite-scroll';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import MatchAPIs from '../../controller/APIs/MatchAPIs';
-import RoundView from './compoments/RoundView';
-let rounds = [1];
+import FixtureView from './compoments/FixtureView';
+
 const MatchScreen = () => {
   let [fixtures, setFixtures] = React.useState([]);
-  const [round, setRound] = React.useState('');
-  // let round = '';
+  let [fixturesDT, setFixturesDT] = React.useState([]);
+  let [start, setStart] = React.useState();
+  let [end, setEnd] = React.useState();
   let [isLoading, setIsLoading] = React.useState(true);
 
-  const getCurrentRound = async () => {
-    try {
-      let data = await MatchAPIs.getCurrentRound('39', '2022');
-      ////////////////////////////////////////////////data?.response[0]
-      setRound(data?.response[0]);
-      console.log('setRound abc');
-      console.log(data?.response[0]);
-    } catch (error) {
-      console.log(error);
-      setRound('Regular Season - 17');
-    }
-  };
-
-  const getFixturesByRound = async () => {
+  const getFixturesByLeague = async () => {
     setIsLoading(true);
     try {
-      let data = await MatchAPIs.getFixturesByRound(
-        '39',
-        '2022',
-        // 'Regular Season - 10',
-        round,
+      let data = await MatchAPIs.getFixturesByLeague('39', '2022');
+      let response = data?.response?.sort((a, b) =>
+        a['fixture']['date'] > b['fixture']['date'] ? 1 : -1,
       );
-      console.log('fixtures data:');
-      console.log(data);
-      setFixtures(data);
-      // setFixtures(data);
+      setFixtures(response);
+      let index = response.findIndex((element, index) => {
+        if (element?.fixture?.status?.short === 'NS') {
+          return true;
+        }
+      });
+      console.log('index');
+      console.log(index);
+      console.log(index + 7 > 379 ? 379 : index + 7);
+      setStart(index - 4);
+      setEnd(index + 6);
     } catch (error) {
       console.log(error);
       setFixtures([]);
@@ -55,53 +43,50 @@ const MatchScreen = () => {
   };
 
   const onEnd = () => {
-    Alert.alert('You Have Reached To List End...');
+    let newEnd = end + 2 > 379 ? 379 : end + 2;
+    let newStart = start - 3 < 0 ? 0 : start - 3;
+    if (end - start < 25) {
+      setEnd(newEnd);
+      setStart(newStart);
+    } else {
+      Alert.alert('Đã đầy bộ nhớ');
+    }
   };
-  const onStart = () => {
-    setIsFetching(false);
-    Alert.alert('Start...');
-  };
-
-  const [isFetching, setIsFetching] = React.useState(false);
-
-  // const fetchData = () => {
-  //   dispatch(getAllTopicAction(userParamData));
-  //   setIsFetching(false);
-  // };
 
   const onRefresh = () => {
-    setIsFetching(true);
-    onStart();
+    let newStart = start - 5 < 0 ? 0 : start - 5;
+    if (end - start < 25) {
+      setStart(newStart);
+    } else {
+      Alert.alert('Đã đầy bộ nhớ');
+    }
   };
 
   React.useEffect(() => {
-    if (round != '') {
-      getFixturesByRound();
-      console.log('fixtures:');
-      console.log(fixtures);
-    } else {
-      getCurrentRound();
-    }
-  }, [round]);
+    getFixturesByLeague();
+  }, []);
 
   return (
-    <View
-      style={{
-        paddingHorizontal: 12,
-        flex: 1,
-      }}>
+    <View style={styles.container}>
       {isLoading ? (
         <View style={styles.loadingView}>
           <ActivityIndicator size="large" />
         </View>
       ) : (
         <FlatList
-          data={rounds}
-          renderItem={(item, index) => <RoundView roundRS={fixtures} />}
+          data={(fixturesDT = fixtures?.splice(start, end - start))}
+          renderItem={({item, index}) => {
+            console.log(end - start);
+            return (
+              <FixtureView
+                fixture={{item, season: fixturesDT[index - 1]?.league?.round}}
+              />
+            );
+          }}
           numColumns={1}
           onEndReached={onEnd}
           onRefresh={onRefresh}
-          refreshing={isFetching}
+          refreshing={false}
           onEndReachedThreshold={0.1}
         />
       )}
@@ -112,15 +97,25 @@ const MatchScreen = () => {
 export default MatchScreen;
 
 const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 12,
+    flex: 1,
+    marginTop: 10,
+  },
   imageThumbnail: {
     height: 24,
     width: 24,
     resizeMode: 'contain',
     marginHorizontal: 16,
-    // backgroundColor: 'blue',
   },
   loadingView: {
     flex: 1,
+    justifyContent: 'center',
+    alignContent: 'center',
+  },
+  loadingViewEnd: {
+    flex: 1,
+    height: 10,
     justifyContent: 'center',
     alignContent: 'center',
   },

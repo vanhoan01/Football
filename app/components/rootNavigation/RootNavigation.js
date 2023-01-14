@@ -31,6 +31,7 @@ const RootNavigation = () => {
         <Stack.Screen
           name={Constant.screenName.FixtureDetails}
           component={FixtureDetailsScreen}
+          options={{title: 'Trận đấu'}}
         />
         <Stack.Screen
           name={Constant.screenName.Search}

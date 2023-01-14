@@ -55,7 +55,11 @@ const RootTabNavigator = () => {
           <Tab.Screen
             name={Constant.screenName.Match}
             component={MatchScreen}
-            options={{headerShown: false, tabBarLabel: 'Trận đấu'}}
+            options={{
+              headerShown: false,
+              tabBarLabel: 'Trận đấu',
+              unmountOnBlur: true,
+            }}
           />
           <Tab.Screen
             name={Constant.screenName.Charts}
