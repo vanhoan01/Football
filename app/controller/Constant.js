@@ -32,6 +32,7 @@ export default {
     Statistics: 'StatisticsScreen',
     Players: 'Teams',
     Teams: 'ListPlayer',
+    DetailPlayer:'DetailPlayer',
     ProfilePlayer: 'ProfilePlayer',
     FixtureDetails: 'FixtureDetailsScreen',
     RootTabNavigator: 'RootTabNavigator',

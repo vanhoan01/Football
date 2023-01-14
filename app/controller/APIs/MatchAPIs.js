@@ -11,6 +11,7 @@ export default class MatchAPIs {
     getPredictionsFixture:
       'https://api-football-v1.p.rapidapi.com/v3/predictions',
     getTeams: ' https://api-football-v1.p.rapidapi.com/v3/teams',
+    getPlayer: 'https://api-football-v1.p.rapidapi.com/v3/players',
     getSquads: 'https://api-football-v1.p.rapidapi.com/v3/players/squads',
   };
 
@@ -161,6 +162,25 @@ export default class MatchAPIs {
     try {
       let reponse = await axios.get(
         this.endpoints.getSquads + '?team=' + team,
+        {
+          headers: {
+            'X-RapidAPI-Key': API.headers.XRapidAPIKey,
+            'X-RapidAPI-Host': API.headers.XRapidAPIHost,
+          },
+        },
+      );
+      return Promise.resolve(reponse.data);
+    } catch (error) {
+      console.log('Error call api ');
+      console.log(error);
+      return Promise.reject(error);
+    }
+  };
+
+  static getPlayer = async (id = '882', season = '2022') => {
+    try {
+      let reponse = await axios.get(
+        this.endpoints.getPlayer + '?id=' + id + '&season=' + season,
         {
           headers: {
             'X-RapidAPI-Key': API.headers.XRapidAPIKey,

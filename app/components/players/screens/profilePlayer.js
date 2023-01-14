@@ -1,14 +1,30 @@
 import React, {useEffect} from 'react';
 import {View, StyleSheet, TouchableOpacity, Image, Text} from 'react-native';
+import Constant from '../../../controller/Constant';
+import {StackActions, useNavigation} from '@react-navigation/native';
 
 const ProfilePlayer = squads => {
-  useEffect(() => {
-    console.log('hehehehe squads', squads.squads.players);
-  }, []);
+  const navigation = useNavigation();
+
+  const handleShowDetailPlayer = () => {
+    navigation.dispatch(
+      StackActions.push(Constant.screenName.DetailPlayer, {id}),
+    );
+  };
+
   return (
     <View>
       {squads.squads.players.map(squad => (
-        <TouchableOpacity style={styles.touch} key={squad.number}>
+        <TouchableOpacity
+          onPress={() => {
+            const id = squad.id;
+            console.log('hehehe', id);
+            navigation.dispatch(
+              StackActions.push(Constant.screenName.DetailPlayer, {id}),
+            );
+          }}
+          style={styles.touch}
+          key={squad.number}>
           <Image style={styles.logo} source={{uri: squad.photo}} />
           <View style={styles.container}>
             <Text style={styles.txt}>Name : {squad.name}</Text>
