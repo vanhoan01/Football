@@ -28,10 +28,8 @@ const ChartsScreen = () => {
   };
 
   React.useEffect(() => {
-    setIsLoading(true);
-    getFixturesByChart();
-    // console.log('fixtures: ');
-    // console.log(fixtures);
+    // setIsLoading(true);
+    // getFixturesByChart();
   }, []);
   return (
     <ScrollView style={{flexDirection: 'column', backgroundColor: 'white'}}>

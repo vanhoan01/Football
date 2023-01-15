@@ -13,9 +13,6 @@ import RootTabNavigator from './RootTabNavigator';
 import SearchScreen from '../search/screens/SearchScreen';
 import MathTeamScreen from '../charts/screens/MathTeamScreen';
 import TopScoreScreens from '../statistics/Screens/TopScoreScreens';
-import TopAssistsScreens from '../statistics/Screens/TopAssistsScreens';
-import TopRedCardScreens from '../statistics/Screens/TopRedCardScreens';
-import TopYellowCardScreens from '../statistics/Screens/TopYellowCardScreens';
 
 const Stack = createNativeStackNavigator();
 
@@ -55,9 +52,6 @@ const RootNavigation = () => {
           options={{title: 'Cầu thủ'}}
         />
         <Stack.Screen name="Score" component={TopScoreScreens} />
-        <Stack.Screen name="Assist" component={TopAssistsScreens} />
-        <Stack.Screen name="RedCard" component={TopRedCardScreens} />
-        <Stack.Screen name="YellowCard" component={TopYellowCardScreens} />
       </Stack.Navigator>
     </NavigationContainer>
   );

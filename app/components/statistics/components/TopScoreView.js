@@ -1,51 +1,59 @@
 import {StyleSheet, Text, View, Image, Dimensions} from 'react-native';
 import React from 'react';
 import Constant from '../../../controller/Constant';
-const TopScoreView = ({statistics}) => {
-  // console.log('hehehehe', statistics?.item?.statistics[0]?.team?.name);
-  return (
-    <View style={styles.rootView}>
-      <View style={styles.viewTong}>
-        <View style={styles.viewTong2}>
-          <View style={styles.view}></View>
+const TopScoreView = ({statistics, index, tabSL}) => {
+  console.log('STT', index);
+  let total = 0;
+  switch (tabSL) {
+    case 0:
+      total = statistics?.item?.statistics[0]?.goals?.total;
+      break;
+
+    case 1:
+      total = statistics?.item?.statistics[0]?.goals?.assists;
+      break;
+
+    case 2:
+      total = statistics?.item?.statistics[0]?.cards?.yellow;
+      break;
+
+    case 3:
+      total = statistics?.item?.statistics[0]?.cards?.red;
+      break;
+    default:
+      total = statistics?.item?.statistics[0]?.goals?.total;
+  }
+  return total > 0 ? (
+    <View style={{flexDirection: 'column'}}>
+      <View
+        style={{height: 1, width: '100%', backgroundColor: '#CCCCCC'}}></View>
+      <View style={styles.rootView}>
+        <Text style={styles.textId}>{index + 1}</Text>
+        <View style={styles.viewImg}>
+          <Image
+            source={{uri: statistics?.item?.player?.photo}}
+            style={styles.img}
+          />
         </View>
-        <View style={styles.root}>
-          <View style={styles.root1}>
-            <Text style={styles.textId}></Text>
-          </View>
-          <View style={styles.viewImg}>
+        <View style={styles.viewInfo1}>
+          <Text style={styles.textPlayer}>
+            {statistics?.item?.player?.name}
+          </Text>
+          <View style={styles.viewLogo}>
             <Image
-              source={{uri: statistics?.item?.player?.photo}}
-              style={styles.img}
+              source={{uri: statistics?.item?.statistics[0]?.team?.logo}}
+              style={styles.logo}
             />
-          </View>
-          <View style={styles.viewInfo}>
-            <View style={styles.viewInfo1}>
-              <Text style={styles.textPlayer}>
-                {statistics?.item?.player?.name}
-              </Text>
-              <View style={styles.viewLogo}>
-                <Image
-                  source={{uri: statistics?.item?.statistics[0]?.team?.logo}}
-                  style={styles.logo}
-                />
-                <Text style={styles.textTeam}>
-                  {statistics?.item?.statistics[0]?.team?.name}
-                </Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.viewGoal}>
-            <Text style={styles.textGoal}>
-              {statistics?.item?.statistics[0]?.goals?.total}
+            <Text style={styles.textTeam}>
+              {statistics?.item?.statistics[0]?.team?.name}
             </Text>
           </View>
         </View>
-        <View style={styles.viewTong2}>
-          <View style={styles.view}></View>
-        </View>
+        <Text style={styles.textGoal}>{total}</Text>
       </View>
     </View>
+  ) : (
+    <View></View>
   );
 };
 
@@ -73,7 +81,8 @@ const styles = StyleSheet.create({
   rootView: {
     flex: 1,
     backgroundColor: Constant.color.background,
-    flexDirection: 'column',
+    flexDirection: 'row',
+    paddingVertical: 5,
   },
   viewH: {
     flexDirection: 'row',
@@ -116,19 +125,22 @@ const styles = StyleSheet.create({
   },
   textId: {
     fontSize: 16,
-    color: Constant.color.text,
+    color: 'black',
+    width: 24,
+    textAlign: 'center',
+    textAlignVertical: 'center',
   },
   viewImg: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: Dimensions.get('screen').width * 0.15,
+    width: 45,
+    marginHorizontal: 10,
   },
   img: {
     width: 45,
     height: 45,
     borderRadius: 45,
     resizeMode: 'contain',
-    margin: 10,
   },
   viewInfo: {
     width: Dimensions.get('screen').width * 0.5,
@@ -137,10 +149,10 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   viewInfo1: {
-    marginLeft: 10,
+    flex: 1,
   },
   textPlayer: {
-    color: Constant.color.text,
+    color: 'black',
   },
   viewLogo: {
     flexDirection: 'row',
@@ -156,15 +168,16 @@ const styles = StyleSheet.create({
   textTeam: {
     fontSize: 13,
     marginLeft: 8,
-    color: Constant.color.text,
+    color: 'grey',
   },
   viewGoal: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: Dimensions.get('screen').width * 0.21,
   },
   textGoal: {
-    color: Constant.color.text,
     fontSize: 16,
+    color: 'black',
+    paddingHorizontal: 10,
+    textAlignVertical: 'center',
   },
 });
