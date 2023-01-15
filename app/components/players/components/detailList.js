@@ -13,10 +13,10 @@ const DetailList = ({team}) => {
     <TouchableOpacity onPress={handleShowProfile} style={styles.touch}>
       <Image style={styles.logo} source={{uri: team.team.logo}} />
       <View style={styles.container}>
-        <Text style={styles.txt}>Name : {team.team.name}</Text>
-        <Text style={styles.txt}>Code : {team.team.code}</Text>
-        <Text style={styles.txt}>Country : {team.team.country}</Text>
-        <Text style={styles.txt}>Founded : {team.team.founded}</Text>
+        <Text style={styles.txt}>Tên : {team.team.name}</Text>
+        <Text style={styles.txt}>Mã tên : {team.team.code}</Text>
+        <Text style={styles.txt}>Quốc gia : {team.team.country}</Text>
+        <Text style={styles.txt}>Thành lập : {team.team.founded}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -26,8 +26,8 @@ const styles = StyleSheet.create({
   touch: {
     borderWidth: 1,
     borderColor: 'thistle',
-    borderRadius: 20,
-    marginTop: 10,
+    borderRadius: 7,
+    marginBottom: 10,
     flexDirection: 'row',
     flexWrap: 'wrap',
     backgroundColor: 'white',

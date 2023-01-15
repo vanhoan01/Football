@@ -2,7 +2,7 @@ import {StyleSheet, Text, View, FlatList} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {useRoute} from '@react-navigation/native';
 import MatchAPIs from '../../../controller/APIs/MatchAPIs';
-import ProfilePlayer from './ProfilePlayer';
+import ProfilePlayer from '../components/ProfilePlayer';
 
 const ListPlayer = () => {
   const [squads, setSquads] = useState([]);
@@ -23,7 +23,7 @@ const ListPlayer = () => {
   }, []);
 
   return (
-    <View>
+    <View style={{paddingHorizontal: 10, marginTop: 10}}>
       <FlatList
         style={styles.rootview}
         data={squads}

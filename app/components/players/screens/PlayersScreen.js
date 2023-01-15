@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {View, StyleSheet, Text, FlatList} from 'react-native';
-import DetailList from './detailList';
+import DetailList from '../components/detailList';
 import MatchAPIs from '../../../controller/APIs/MatchAPIs';
 
 const PlayersScreen = () => {
@@ -21,7 +21,7 @@ const PlayersScreen = () => {
   }, []);
 
   return (
-    <View>
+    <View style={{paddingHorizontal: 10, marginTop: 10}}>
       <FlatList
         style={styles.rootview}
         data={team}

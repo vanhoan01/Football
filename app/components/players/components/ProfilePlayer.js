@@ -27,10 +27,10 @@ const ProfilePlayer = squads => {
           key={squad.number}>
           <Image style={styles.logo} source={{uri: squad.photo}} />
           <View style={styles.container}>
-            <Text style={styles.txt}>Name : {squad.name}</Text>
-            <Text style={styles.txt}>Number : {squad.number}</Text>
-            <Text style={styles.txt}>Position : {squad.position}</Text>
-            <Text style={styles.txt}>Ages : {squad.age}</Text>
+            <Text style={styles.txt}>Tên : {squad.name}</Text>
+            <Text style={styles.txt}>Số : {squad.number}</Text>
+            <Text style={styles.txt}>Vị trí : {squad.position}</Text>
+            <Text style={styles.txt}>Tuổi : {squad.age}</Text>
           </View>
         </TouchableOpacity>
       ))}
@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
   touch: {
     borderWidth: 1,
     borderColor: 'thistle',
-    borderRadius: 20,
-    marginTop: 10,
+    borderRadius: 7,
+    marginBottom: 10,
     flexDirection: 'row',
     flexWrap: 'wrap',
     backgroundColor: 'white',

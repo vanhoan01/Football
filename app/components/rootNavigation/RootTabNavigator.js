@@ -7,7 +7,7 @@ import Constant from '../../controller/Constant';
 import MatchScreen from '../match/MatchScreen';
 import ChartsScreen from '../charts/ChartsScreen';
 import StatisticsScreen from '../statistics/StatisticsScreen';
-import PlayersScreen from '../players/components/PlayersScreen';
+import PlayersScreen from '../players/screens/PlayersScreen';
 import {StyleSheet, View} from 'react-native';
 import {StackActions, useNavigation} from '@react-navigation/native';
 

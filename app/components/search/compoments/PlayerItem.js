@@ -18,12 +18,13 @@ const PlayerItem = ({player}) => {
   };
   //Constant.images.img595097
   return (
-    <TouchableOpacity onPress={showUserDetail}>
+    <TouchableOpacity onPress={showUserDetail} style={{marginBottom: 10}}>
       <View
         style={{
-          padding: 10,
           flexDirection: 'row',
           alignContent: 'center',
+          paddingVertical: 10,
+          backgroundColor: 'white',
         }}>
         <Image
           style={styles.imageThumbnail}
@@ -31,16 +32,14 @@ const PlayerItem = ({player}) => {
         />
         <View
           style={{
-            padding: 10,
             flexDirection: 'column',
             alignContent: 'center',
+            paddingLeft: 10,
           }}>
           <Text
             style={{
               fontSize: 16,
-              fontWeight: '600',
               color: 'black',
-              paddingLeft: 15,
               textAlignVertical: 'center',
             }}
             numberOfLines={1}>
@@ -48,10 +47,8 @@ const PlayerItem = ({player}) => {
           </Text>
           <Text
             style={{
-              fontSize: 16,
-              fontWeight: '600',
-              color: 'black',
-              paddingLeft: 15,
+              fontSize: 14,
+              color: 'grey',
               textAlignVertical: 'center',
             }}
             numberOfLines={1}>
@@ -59,10 +56,30 @@ const PlayerItem = ({player}) => {
           </Text>
           <View
             style={{
-              padding: 10,
               flexDirection: 'row',
               alignContent: 'center',
-            }}></View>
+            }}>
+            <View style={{height: 20, width: 20}}>
+              <Image
+                source={{uri: player?.statistics[0]?.team?.logo}}
+                style={{
+                  width: 20,
+                  height: 20,
+                  borderRadius: 20,
+                  resizeMode: 'contain',
+                }}
+              />
+            </View>
+            <Text
+              style={{
+                fontSize: 14,
+                color: 'grey',
+                paddingLeft: 5,
+                textAlignVertical: 'center',
+              }}>
+              {player?.statistics[0]?.team?.name}
+            </Text>
+          </View>
         </View>
       </View>
     </TouchableOpacity>

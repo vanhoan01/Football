@@ -319,13 +319,16 @@ const SearchScreen = () => {
 
   const onSubmit = key => {
     // Alert.alert(key);
+    setFixtures([]);
+    setPlayers([]);
     setSubmit(true);
     setKeyword(key);
     setTab(0);
     search(key);
   };
   const onSelectKey = key => {
-    // Alert.alert(key);
+    setFixtures([]);
+    setPlayers([]);
     setInput(key);
     // getKeywords(key);
     setTab(0);

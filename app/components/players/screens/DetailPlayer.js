@@ -25,16 +25,18 @@ const DetailPlayer = () => {
       <Image style={styles.avatar} source={{uri: player?.player?.photo}} />
       <View style={styles.container}>
         <Text style={styles.text}>
-          Full Name :{player.player?.firstname} {player.player?.lastname}
+          Họ và tên: {player.player?.firstname} {player.player?.lastname}
         </Text>
-        <Text style={styles.text}>Height : {player.player?.height}</Text>
-        <Text style={styles.text}>Weight : {player.player?.weight}</Text>
+        <Text style={styles.text}>Chiều cao : {player.player?.height}</Text>
+        <Text style={styles.text}>Cân nặng : {player.player?.weight}</Text>
         <Text style={styles.text}>
-          Nationality : {player.player?.nationality}
+          Quốc tịch : {player.player?.nationality}
         </Text>
-        <Text style={styles.text}>Age : {player.player?.age}</Text>
-        <Text style={styles.text}>Birth : {player.player?.birth?.date}</Text>
-        <Text style={styles.text}>Place : {player.player?.birth?.place}</Text>
+        <Text style={styles.text}>Tuổi : {player.player?.age}</Text>
+        <Text style={styles.text}>
+          Ngày sinh : {player.player?.birth?.date}
+        </Text>
+        <Text style={styles.text}>Nơi ở : {player.player?.birth?.place}</Text>
       </View>
     </View>
   );
