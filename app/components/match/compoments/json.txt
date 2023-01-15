@@ -1,4 +1,45 @@
 {
+  "all": 
+  {
+    "draw": 3, 
+    "goals": 
+    {
+      "against": 34, 
+      "for": 17
+    }, 
+    "lose": 12, 
+    "played": 19, 
+    "win": 4
+  }, 
+  "away": 
+  {
+    "draw": 0, 
+    "goals": 
+    {
+      "against": 18, 
+      "for": 8
+    }, 
+    "lose": 7, 
+    "played": 10, 
+    "win": 3
+  }, 
+  "description": "Relegation - Championship", 
+  "form": "WLLLL", 
+  "goalsDiff": -17, 
+  "group": "Premier League", 
+  "home": 
+  {
+    "draw": 3, 
+    "goals": 
+    {
+      "against": 16, "for": 9
+    }, 
+    "lose": 5, "played": 9, "win": 1
+  }, 
+  "points": 15, "rank": 20, "status": "same", 
+  "team": {"id": 41, "logo": "https://media-2.api-sports.io/football/teams/41.png", "name": "Southampton"}, "update": "2023-01-14T00:00:00+00:00"}
+
+{
   "get": "fixtures",
   "parameters": {
     "league": "39",

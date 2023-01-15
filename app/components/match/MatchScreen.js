@@ -33,7 +33,7 @@ const MatchScreen = () => {
       console.log('index');
       console.log(index);
       console.log(index + 7 > 379 ? 379 : index + 7);
-      setStart(index - 4);
+      setStart(index - 3);
       setEnd(index + 6);
     } catch (error) {
       console.log(error);
@@ -63,7 +63,7 @@ const MatchScreen = () => {
   };
 
   React.useEffect(() => {
-    getFixturesByLeague();
+    // getFixturesByLeague();
   }, []);
 
   return (
