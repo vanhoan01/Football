@@ -63,7 +63,7 @@ const MatchScreen = () => {
   };
 
   React.useEffect(() => {
-    // getFixturesByLeague();
+    getFixturesByLeague();
   }, []);
 
   return (
