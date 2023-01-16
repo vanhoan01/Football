@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignContent: 'center',
+    color: 'blue',
   },
   loadingViewEnd: {
     flex: 1,

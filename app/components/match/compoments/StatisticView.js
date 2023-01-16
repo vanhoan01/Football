@@ -1,31 +1,19 @@
-import {StackActions, useNavigation, useRoute} from '@react-navigation/native';
 import * as React from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  SafeAreaView,
-  ScrollView,
-} from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import {View, Text, StyleSheet} from 'react-native';
 
 const StatisticView = ({statistic}) => {
-  let data = statistic?.item;
   console.log('data statistic');
-  console.log(statistic?.item);
+  console.log(statistic);
   return (
     <View
       style={{
         flexDirection: 'row',
         justifyContent: 'space-between',
       }}
-      key={data?.type}>
-      <Text style={styles.statisticValue}>{data?.home}</Text>
-      <Text style={styles.statisticType}>{data?.type}</Text>
-      <Text style={styles.statisticValue}>{data?.away}</Text>
+      key={statistic?.type}>
+      <Text style={styles.statisticValue}>{statistic?.home}</Text>
+      <Text style={styles.statisticType}>{statistic?.type}</Text>
+      <Text style={styles.statisticValue}>{statistic?.away}</Text>
     </View>
   );
 };
