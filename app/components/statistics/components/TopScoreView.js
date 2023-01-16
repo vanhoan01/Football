@@ -1,6 +1,15 @@
-import {StyleSheet, Text, View, Image, Dimensions} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
 import React from 'react';
 import Constant from '../../../controller/Constant';
+import {StackActions, useNavigation} from '@react-navigation/native';
+
 const TopScoreView = ({statistics, index, tabSL}) => {
   console.log('STT', index);
   let total = 0;
@@ -23,35 +32,45 @@ const TopScoreView = ({statistics, index, tabSL}) => {
     default:
       total = statistics?.item?.statistics[0]?.goals?.total;
   }
+  const navigation = useNavigation();
+  const showUserDetail = () => {
+    let id = statistics?.item?.player?.id;
+    navigation.dispatch(
+      StackActions.push(Constant.screenName.DetailPlayer, {id}),
+    );
+  };
+
   return total > 0 ? (
-    <View style={{flexDirection: 'column'}}>
-      <View
-        style={{height: 1, width: '100%', backgroundColor: '#CCCCCC'}}></View>
-      <View style={styles.rootView}>
-        <Text style={styles.textId}>{index + 1}</Text>
-        <View style={styles.viewImg}>
-          <Image
-            source={{uri: statistics?.item?.player?.photo}}
-            style={styles.img}
-          />
-        </View>
-        <View style={styles.viewInfo1}>
-          <Text style={styles.textPlayer}>
-            {statistics?.item?.player?.name}
-          </Text>
-          <View style={styles.viewLogo}>
+    <TouchableOpacity onPress={showUserDetail}>
+      <View style={{flexDirection: 'column'}}>
+        <View
+          style={{height: 1, width: '100%', backgroundColor: '#CCCCCC'}}></View>
+        <View style={styles.rootView}>
+          <Text style={styles.textId}>{index + 1}</Text>
+          <View style={styles.viewImg}>
             <Image
-              source={{uri: statistics?.item?.statistics[0]?.team?.logo}}
-              style={styles.logo}
+              source={{uri: statistics?.item?.player?.photo}}
+              style={styles.img}
             />
-            <Text style={styles.textTeam}>
-              {statistics?.item?.statistics[0]?.team?.name}
-            </Text>
           </View>
+          <View style={styles.viewInfo1}>
+            <Text style={styles.textPlayer}>
+              {statistics?.item?.player?.name}
+            </Text>
+            <View style={styles.viewLogo}>
+              <Image
+                source={{uri: statistics?.item?.statistics[0]?.team?.logo}}
+                style={styles.logo}
+              />
+              <Text style={styles.textTeam}>
+                {statistics?.item?.statistics[0]?.team?.name}
+              </Text>
+            </View>
+          </View>
+          <Text style={styles.textGoal}>{total}</Text>
         </View>
-        <Text style={styles.textGoal}>{total}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   ) : (
     <View></View>
   );

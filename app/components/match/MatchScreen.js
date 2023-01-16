@@ -16,6 +16,7 @@ const MatchScreen = () => {
   let [start, setStart] = React.useState();
   let [end, setEnd] = React.useState();
   let [isLoading, setIsLoading] = React.useState(true);
+  let [footerLoading, setFooterLoading] = React.useState(false);
 
   const getFixturesByLeague = async () => {
     setIsLoading(true);
@@ -42,24 +43,39 @@ const MatchScreen = () => {
     setIsLoading(false);
   };
 
-  const onEnd = () => {
-    let newEnd = end + 2 > 379 ? 379 : end + 2;
-    let newStart = start - 3 < 0 ? 0 : start - 3;
-    if (end - start < 25) {
-      setEnd(newEnd);
-      setStart(newStart);
-    } else {
-      Alert.alert('Đã đầy bộ nhớ');
+  const onRefresh = () => {
+    if (start > 0) {
+      let newStart = start - 5 < 0 ? 0 : start - 5;
+      let newEnd;
+      if (end - start < 15) {
+        setStart(newStart);
+      } else {
+        newEnd = end - 5;
+        setEnd(newEnd);
+        setStart(newStart);
+      }
     }
+    setFooterLoading(false);
   };
 
-  const onRefresh = () => {
-    let newStart = start - 5 < 0 ? 0 : start - 5;
-    if (end - start < 25) {
-      setStart(newStart);
-    } else {
-      Alert.alert('Đã đầy bộ nhớ');
+  const onEnd = () => {
+    setFooterLoading(true);
+    if (end < 379) {
+      let newEnd = end + 2 > 379 ? 379 : end + 2;
+      let newStart = start - 3 < 0 ? 0 : start - 3;
+      if (end - start < 15) {
+        setStart(newStart);
+        setEnd(newEnd);
+      } else {
+        newStart = start + 2 < 0 ? 0 : start + 2;
+        setStart(newStart);
+        setEnd(newEnd);
+      }
     }
+    this.flatListRef.scrollToIndex({
+      animated: true,
+      index: end - start > 16 ? 13 : end - start - 5,
+    });
   };
 
   React.useEffect(() => {
@@ -77,6 +93,7 @@ const MatchScreen = () => {
           data={(fixturesDT = fixtures?.splice(start, end - start))}
           renderItem={({item, index}) => {
             console.log(end - start);
+            // index == fixturesDT.length ? setFooterLoading(false) : null;
             return (
               <FixtureView
                 fixture={{item, season: fixturesDT[index - 1]?.league?.round}}
@@ -88,6 +105,20 @@ const MatchScreen = () => {
           onRefresh={onRefresh}
           refreshing={false}
           onEndReachedThreshold={0.1}
+          ref={ref => {
+            this.flatListRef = ref;
+          }}
+          ListFooterComponent={
+            <View style={{height: 50, width: '100%'}}>
+              {footerLoading == true ? (
+                <View style={styles.loadingView}>
+                  <ActivityIndicator size="large" />
+                </View>
+              ) : (
+                <View></View>
+              )}
+            </View>
+          }
         />
       )}
     </View>
