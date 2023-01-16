@@ -1,7 +1,6 @@
 import {StackActions, useNavigation} from '@react-navigation/native';
 import * as React from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import Constant from '../../../controller/Constant';
 
@@ -9,14 +8,30 @@ const PlayerItem = ({player}) => {
   console.log('player');
   console.log(player);
   player = player?.item;
+  let id = player?.player?.id;
+  const position = position => {
+    switch (position) {
+      case 'Goalkeeper':
+        return 'Thủ môn';
+      case 'Defender':
+        return 'Hậu vệ';
+      case 'Center Defender':
+        return 'Trung vệ';
+      case 'Midfielder':
+        return 'Tiền vệ';
+      case 'Attacker':
+        return 'Tiền đạo';
+      default:
+        return 'Trung vệ';
+    }
+  };
   const navigation = useNavigation();
   const showUserDetail = () => {
-    // navigation
-    //   .dispatch
-    //   //   StackActions.push(Constant.screenName.UserDetail, {id: player.id}),
-    //   ();
+    navigation.dispatch(
+      StackActions.push(Constant.screenName.DetailPlayer, {id}),
+    );
   };
-  //Constant.images.img595097
+
   return (
     <TouchableOpacity onPress={showUserDetail} style={{marginBottom: 10}}>
       <View
@@ -33,7 +48,7 @@ const PlayerItem = ({player}) => {
         <View
           style={{
             flexDirection: 'column',
-            alignContent: 'center',
+            justifyContent: 'space-between',
             paddingLeft: 10,
           }}>
           <Text
@@ -52,7 +67,7 @@ const PlayerItem = ({player}) => {
               textAlignVertical: 'center',
             }}
             numberOfLines={1}>
-            {player?.statistics[0]?.games?.position}
+            {position(player?.statistics[0]?.games?.position)}
           </Text>
           <View
             style={{

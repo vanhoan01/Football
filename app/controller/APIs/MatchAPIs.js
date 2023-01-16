@@ -177,10 +177,16 @@ export default class MatchAPIs {
     }
   };
 
-  static getPlayer = async (id = '882', season = '2022') => {
+  static getPlayer = async (id = '1100', league = '39', season = '2022') => {
     try {
       let reponse = await axios.get(
-        this.endpoints.getPlayer + '?id=' + id + '&season=' + season,
+        this.endpoints.getPlayer +
+          '?id=' +
+          id +
+          '&league=' +
+          league +
+          '&season=' +
+          season,
         {
           headers: {
             'X-RapidAPI-Key': API.headers.XRapidAPIKey,
