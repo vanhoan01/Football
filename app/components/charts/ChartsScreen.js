@@ -11,7 +11,7 @@ import ChartAPIs from '../../controller/APIs/ChartAPI';
 import {Picker} from '@react-native-picker/picker';
 
 const ChartsScreen = () => {
-  let [isLoading, setIsLoading] = React.useState(false);
+  let [isLoading, setIsLoading] = React.useState(true);
   const [fixtures, setFixtures] = React.useState([]);
   const [selectedValue, setSelectedValue] = React.useState('2022');
 
@@ -28,15 +28,16 @@ const ChartsScreen = () => {
   };
 
   React.useEffect(() => {
-    setIsLoading(true);
     getFixturesByChart();
   }, []);
   return (
-    <ScrollView style={{flexDirection: 'column', backgroundColor: 'white'}}>
+    <ScrollView
+      style={{flex: 1, flexDirection: 'column', backgroundColor: 'white'}}>
       <View
         style={{height: 1, width: '100%', backgroundColor: '#CCCCCC'}}></View>
       <View
         style={{
+          flex: 1,
           paddingTop: 10,
           paddingHorizontal: 10,
           flexDirection: 'column',

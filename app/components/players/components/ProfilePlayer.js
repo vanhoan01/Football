@@ -12,6 +12,23 @@ const ProfilePlayer = squads => {
     );
   };
 
+  const position = position => {
+    switch (position) {
+      case 'Goalkeeper':
+        return 'Thủ môn';
+      case 'Defender':
+        return 'Hậu vệ';
+      case 'Center Defender':
+        return 'Trung vệ';
+      case 'Midfielder':
+        return 'Tiền vệ';
+      case 'Attacker':
+        return 'Tiền đạo';
+      default:
+        return 'Trung vệ';
+    }
+  };
+
   return (
     <View>
       {squads.squads.players.map(squad => (
@@ -29,7 +46,7 @@ const ProfilePlayer = squads => {
           <View style={styles.container}>
             <Text style={styles.txt}>Tên : {squad.name}</Text>
             <Text style={styles.txt}>Số : {squad.number}</Text>
-            <Text style={styles.txt}>Vị trí : {squad.position}</Text>
+            <Text style={styles.txt}>Vị trí : {position(squad.position)}</Text>
             <Text style={styles.txt}>Tuổi : {squad.age}</Text>
           </View>
         </TouchableOpacity>

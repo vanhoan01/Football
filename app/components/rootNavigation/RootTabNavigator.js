@@ -21,7 +21,7 @@ const RootTabNavigator = () => {
   return (
     <View style={styles.containerMain}>
       <Appbar.Header style={styles.appbarHeader}>
-        <Appbar.Content title="Football" titleStyle={styles.appbarLogo} />
+        <Appbar.Content title="Premier League" titleStyle={styles.appbarLogo} />
         <Appbar.Action icon="magnify" onPress={showSearch} />
       </Appbar.Header>
       <View style={styles.navigationContainer}>

@@ -21,6 +21,7 @@ const TopScoreScreens = ({text, tabSL}) => {
       console.log(error);
       setStatistics([]);
     }
+    setIsLoading(false);
   };
   const getTopAssist = async () => {
     try {
@@ -30,6 +31,7 @@ const TopScoreScreens = ({text, tabSL}) => {
       console.log(error);
       setStatistics([]);
     }
+    setIsLoading(false);
   };
   const getTopYellowCard = async () => {
     try {
@@ -39,6 +41,7 @@ const TopScoreScreens = ({text, tabSL}) => {
       console.log(error);
       setStatistics([]);
     }
+    setIsLoading(false);
   };
   const getTopRedCard = async () => {
     setIsLoading(true);
@@ -70,7 +73,6 @@ const TopScoreScreens = ({text, tabSL}) => {
         getTopRedCard();
         break;
     }
-    setIsLoading(false);
   }, [tabSL]);
 
   return isLoading ? (
